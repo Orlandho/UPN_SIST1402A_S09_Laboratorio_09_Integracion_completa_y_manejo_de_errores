@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "Laboratorio_09A_UPN_Repaso_Codespaces_Angular_Mock": {
+    "UPN_SIST1402A_S09_Laboratorio_09_Integracion_completa_y_manejo_de_errores": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -43,7 +43,7 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
+                  "maximumWarning": "6kB",
                   "maximumError": "8kB"
                 }
               ],
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Laboratorio_09A_UPN_Repaso_Codespaces_Angular_Mock:build:production"
+              "buildTarget": "UPN_SIST1402A_S09_Laboratorio_09_Integracion_completa_y_manejo_de_errores:build:production"
             },
             "development": {
-              "buildTarget": "Laboratorio_09A_UPN_Repaso_Codespaces_Angular_Mock:build:development"
+              "buildTarget": "UPN_SIST1402A_S09_Laboratorio_09_Integracion_completa_y_manejo_de_errores:build:development"
             }
           },
           "defaultConfiguration": "development"

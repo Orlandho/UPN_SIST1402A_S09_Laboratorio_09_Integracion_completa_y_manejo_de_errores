@@ -7,6 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "producto")
@@ -16,12 +20,16 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "El nombre es obligatorio")
+    @Size(min = 3, max = 120, message = "El nombre debe tener al menos 3 caracteres")
     @Column(nullable = false, length = 120)
     private String nombre;
 
+    @Positive(message = "El precio debe ser mayor que 0")
     @Column(nullable = false)
     private double precio;
 
+    @Min(value = 0, message = "El stock no puede ser negativo")
     @Column(nullable = false)
     private int stock;
 

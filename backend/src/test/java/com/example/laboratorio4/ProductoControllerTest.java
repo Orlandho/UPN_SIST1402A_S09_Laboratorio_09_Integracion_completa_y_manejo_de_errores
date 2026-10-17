@@ -55,4 +55,28 @@ class ProductoControllerTest {
                 .andExpect(jsonPath("$.nombre").value("Microfono Condensador USB"))
                 .andExpect(jsonPath("$.id").isNumber());
     }
+
+    @Test
+    void testRegistrarProductoInvalidoRetorna400() throws Exception {
+        String jsonInvalido = """
+            {
+                "nombre": "AB",
+                "precio": -5.0,
+                "stock": -1
+            }
+        """;
+
+        mockMvc.perform(post("/api/productos")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonInvalido))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testBuscarPorNombre() throws Exception {
+        mockMvc.perform(get("/api/productos/buscar").param("nombre", "Teclado"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$").isArray());
+    }
 }
