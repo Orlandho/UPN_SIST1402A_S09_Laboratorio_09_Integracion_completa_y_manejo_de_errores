@@ -1,0 +1,43 @@
+<mxfile host="Electron" modified="2026-10-17T21:08:00.000Z" agent="Antigravity" version="24.0.0" type="device">
+  <diagram id="upn-sist1402a-flow" name="Flujo Formulario - Validar - Persistir - Notificar">
+    <mxGraphModel dx="1000" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="step1" value="1. Formulario&#xa;(ProductoFormComponent)&#xa;Entrada de datos de usuario" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="160" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="step2" value="2. Validar&#xa;Reactive Forms (FormBuilder)&#xa;¿Campos válidos?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="270" y="145" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="err_val" value="Error Frontend&#xa;markAllAsTouched()&#xa;Mensaje: 'Revise los datos'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fee2e2;strokeColor=#dc2626;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="270" y="290" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="step3" value="3. Enviar&#xa;ProductoService&#xa;Petición HTTP (POST / PUT)&#xa;con Interceptores" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0e7ff;strokeColor=#4f46e5;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="480" y="160" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="step4" value="4. Persistir&#xa;Spring Boot JPA Controller&#xa;Transacción en BD Relacional&#xa;(MySQL / H2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="710" y="160" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="step5" value="5. Notificar&#xa;Observable subscribe()&#xa;Next: Mensaje = 'Guardado'&#xa;Error: Mensaje = 'Revise los datos'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e8ff;strokeColor=#9333ea;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="960" y="155" width="210" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="step1" target="step2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_no" value="Inválido" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="step2" target="err_val">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2_si" value="Válido" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="step2" target="step3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="step3" target="step4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="step4" target="step5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

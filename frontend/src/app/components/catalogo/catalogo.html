@@ -1,0 +1,81 @@
+<div class="catalogo-wrapper">
+  <div class="catalogo-header">
+    <div>
+      <h2>Catálogo de Productos - Integración Consolidada</h2>
+      <p class="subtitle">Búsqueda con Query Params, interceptores y manejo centralizado de errores</p>
+    </div>
+    <div class="header-actions">
+      <button type="button" routerLink="/productos/nuevo" class="btn-create">
+        + Nuevo producto
+      </button>
+      <button type="button" (click)="cargarProductos()" class="btn-reload" [disabled]="cargando()">
+        🔄 Recargar
+      </button>
+    </div>
+  </div>
+
+  <!-- Paso 5 & 6: Búsqueda con ngModel y Query Params -->
+  <div class="search-box">
+    <input
+      type="text"
+      [(ngModel)]="criterio"
+      (keyup.enter)="buscar()"
+      placeholder="Buscar por nombre..."
+      class="search-input"
+    />
+    <button type="button" (click)="buscar()" class="btn-search">Buscar</button>
+    <button type="button" (click)="limpiar()" class="btn-clear">Limpiar</button>
+  </div>
+
+  <!-- Estados de carga y error -->
+  @if (cargando()) {
+    <p class="status-msg loading">Cargando productos...</p>
+  }
+
+  @if (error()) {
+    <div class="status-msg error">
+      <strong>Error:</strong> {{ error() }}
+      <button (click)="cargarProductos()" class="btn-retry">Reintentar</button>
+    </div>
+  }
+
+  @if (!cargando() && !error()) {
+    <div class="table-container">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of productos(); track p.id) {
+            <tr>
+              <td><strong>#{{ p.id }}</strong></td>
+              <td>{{ p.nombre }}</td>
+              <td>S/ {{ p.precio | number:'1.2-2' }}</td>
+              <td>{{ p.stock }}</td>
+              <td>
+                <span class="stock-badge" [class.badge-low]="p.stock < 5" [class.badge-ok]="p.stock >= 5">
+                  {{ p.estadoStock || (p.stock < 5 ? 'BAJO' : 'DISPONIBLE') }}
+                </span>
+              </td>
+              <td class="action-buttons">
+                <button class="btn-edit" [routerLink]="['/productos/editar', p.id]">Editar</button>
+                <button class="btn-delete" (click)="eliminar(p.id)">Eliminar</button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="empty-state">No se encontraron productos coincidentes.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
